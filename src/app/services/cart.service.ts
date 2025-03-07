@@ -1,9 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+import { Product } from '../models/products.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
+  cart = signal<Product[]>([]);
 
-  constructor() { }
+  addToCart = (product: Product) => {
+    console.log('adding', product);
+    this.cart.set([...this.cart(), product]);
+  };
+
+  constructor() {}
 }
